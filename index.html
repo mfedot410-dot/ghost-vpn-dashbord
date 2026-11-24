@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Studio GhostVPN</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600&family=Unbounded:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+--tx:#eef3fb;--mut:#8d9bb2;--bl:#4f9dff;--bl2:#2563eb;--ice:#9bd0ff;--dn:#7b879b;
+--disp:Unbounded,'Segoe UI',system-ui,sans-serif}
+*{box-sizing:border-box}
+html{background:#04060b}
+body{margin:0;min-height:100vh;color:var(--tx);font:400 14px/1.5 Onest,system-ui,sans-serif;
+background:radial-gradient(700px 480px at 12% -5%,rgba(37,99,235,.42),transparent 65%),radial-gradient(600px 420px at 95% 8%,rgba(120,140,170,.22),transparent 65%),radial-gradient(700px 500px at 60% 105%,rgba(37,99,235,.25),transparent 65%),#04060b;background-attachment:fixed}
+.wrap{max-width:1120px;margin:0 auto;padding:22px 16px 56px}
+.glass{background:linear-gradient(145deg,rgba(255,255,255,.11),rgba(255,255,255,.03));border:1px solid rgba(255,255,255,.12);-webkit-backdrop-filter:blur(20px) saturate(150%);backdrop-filter:blur(20px) saturate(150%);box-shadow:inset 0 1px 0 rgba(255,255,255,.2),0 24px 48px -12px rgba(0,0,0,.6)}
+.card{border-radius:24px;padding:20px}
+header{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between;margin-bottom:16px;padding:12px 16px;border-radius:24px}
+.brand{display:flex;gap:12px;align-items:center}
+.logo{width:68px;height:68px;margin:-8px -2px -8px -8px;mix-blend-mode:screen;-webkit-mask-image:radial-gradient(closest-side,#000 80%,transparent 100%);mask-image:radial-gradient(closest-side,#000 80%,transparent 100%)}
+h1{font:500 19px/1.1 var(--disp);margin:0;background:linear-gradient(90deg,#fff,var(--ice));-webkit-background-clip:text;background-clip:text;color:transparent}
+.sub{color:var(--mut);font-size:12.5px;margin-top:3px}
+h2{font:500 14px var(--disp);margin:0}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.btn,input{font:inherit;color:var(--tx);background:linear-gradient(145deg,rgba(255,255,255,.12),rgba(255,255,255,.04));border:1px solid rgba(255,255,255,.13);border-radius:13px;padding:9px 13px;transition:border-color .15s,background .15s}
+input{width:100%;min-width:0;outline:0}
+input::-webkit-inner-spin-button{-webkit-appearance:none}
+input[type=number]{-moz-appearance:textfield}
+input::placeholder{color:#5d6a80}
+.btn{cursor:pointer;display:inline-flex;align-items:center;gap:8px}
+.btn:hover,input:focus{border-color:rgba(155,208,255,.7)}
+:focus-visible{outline:2px solid var(--ice);outline-offset:2px}
+.pri{background:linear-gradient(135deg,#6db1ff,var(--bl2));border-color:rgba(255,255,255,.3);font-weight:600;box-shadow:0 8px 24px -6px rgba(37,99,235,.7)}
+.ic{padding:9px}
+svg.i{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.seg{display:inline-flex;gap:2px;padding:3px;border-radius:14px;background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.08);flex-wrap:wrap}
+.seg button{border:0;background:none;color:var(--mut);font:inherit;padding:6px 12px;border-radius:11px;cursor:pointer}
+.seg button:hover{color:var(--tx)}
+.seg button.on{color:#fff;background:linear-gradient(135deg,#5ea8ff,var(--bl2));box-shadow:0 4px 14px -4px rgba(37,99,235,.8)}
+.per{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin-bottom:16px;padding:12px 16px;border-radius:20px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(168px,1fr));gap:12px;margin-bottom:16px}
+.kpi{padding:16px 18px;border-radius:22px}
+.kpi .l{color:var(--mut);font-size:12.5px}
+.kpi .v{font:500 25px/1.2 var(--disp);margin:6px 0 2px}
+.kpi .s{font-size:12.5px;color:var(--mut)}
+.kpi.main{background:linear-gradient(150deg,rgba(79,157,255,.5),rgba(37,99,235,.18) 55%,rgba(255,255,255,.04));border-color:rgba(155,208,255,.4)}
+.kpi.main .v{font-size:30px}
+.up{color:var(--ice)}.dn{color:var(--dn)}
+.grid{display:grid;grid-template-columns:1.6fr 1fr;gap:16px;margin-bottom:16px}
+@media(max-width:820px){.grid{grid-template-columns:minmax(0,1fr)}}
+.grid>*,.wrap>*{min-width:0;max-width:100%}
+.seg{max-width:100%}
+form{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
+form label{font-size:12.5px;color:var(--mut);display:block;margin-bottom:4px}
+form .full{grid-column:1/-1}
+form .btn{width:100%;justify-content:space-between}
+form .pri{justify-content:center}
+.hint{font-size:12.5px;color:var(--mut);margin:12px 0 0}
+.tw{overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:860px}
+th,td{padding:10px 8px;text-align:right;border-bottom:1px solid rgba(255,255,255,.07);white-space:nowrap}
+th:first-child,td:first-child{text-align:left}
+th{color:var(--mut);font-weight:500;font-size:12.5px}
+td small{display:block;font-size:11.5px}
+.x{padding:4px 10px;border-radius:9px;color:var(--mut);font-size:12.5px}
+svg text{fill:#7c8aa2;font:11px Onest,sans-serif}
+.empty{color:var(--mut);padding:34px 0;text-align:center}
+.vsum{display:flex;justify-content:space-between;align-items:flex-end;gap:8px;margin-top:12px;padding:12px 14px;border-radius:16px;background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.08)}
+.vsum .l{color:var(--mut);font-size:12.5px}
+.vsum b{font:500 22px var(--disp);display:block}
+.vsum span{font-size:12.5px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.chip{border:1px solid rgba(155,208,255,.3);background:rgba(79,157,255,.14);color:var(--tx);font:inherit;font-size:12.5px;border-radius:999px;padding:4px 10px;cursor:pointer}
+.chip:hover{background:rgba(79,157,255,.32)}
+.fr{margin-top:14px}
+.fh{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.fh small{color:var(--mut);font-size:12.5px;margin-left:6px}
+.fn{font:500 18px var(--disp)}
+.fb{height:12px;border-radius:99px;background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.08);margin:6px 0 4px;overflow:hidden}
+.fb i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,var(--bl2),var(--ice));box-shadow:0 0 14px rgba(79,157,255,.6)}
+.fp{font-size:12.5px;color:var(--ice)}
+.fnote{font-size:12.5px;color:var(--mut);margin:10px 0 0}
+form .row{flex-wrap:nowrap}
+form .row .btn,form .vsum .btn{width:auto;flex:none;white-space:nowrap}
+.bar:hover{opacity:.75}
+.pop{position:fixed;z-index:50;padding:12px;border-radius:18px;background:linear-gradient(145deg,rgba(40,52,76,.82),rgba(14,20,34,.9));border:1px solid rgba(255,255,255,.16);-webkit-backdrop-filter:blur(24px);backdrop-filter:blur(24px);box-shadow:0 30px 60px -10px rgba(0,0,0,.8),inset 0 1px 0 rgba(255,255,255,.18)}
+.ch{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.ch b{font:500 13px var(--disp)}
+.ch button,.cg button,.menu button,.ft{border:0;background:none;color:var(--tx);font:inherit;cursor:pointer;border-radius:10px}
+.ch button{width:32px;height:32px;font-size:18px}
+.ch button:hover,.cg button:hover:not(:disabled),.menu button:hover{background:rgba(255,255,255,.1)}
+.cg{display:grid;grid-template-columns:repeat(7,36px);gap:2px;text-align:center}
+.cg i{font-style:normal;color:var(--mut);font-size:11.5px;padding:4px 0}
+.cg button{height:36px}
+.cg button:disabled{opacity:.25;cursor:default}
+.cg button.td{box-shadow:inset 0 0 0 1px rgba(155,208,255,.6)}
+.cg button.on{background:linear-gradient(135deg,#6db1ff,var(--bl2));font-weight:600}
+.ft{display:block;margin:8px auto 0;padding:5px 12px;color:var(--ice);font-size:12.5px}
+.menu{padding:6px;min-width:200px}
+.menu button{display:block;width:100%;text-align:left;padding:9px 12px}
+.menu button.on{background:rgba(79,157,255,.22);color:#fff}
+.ov{position:fixed;inset:0;z-index:60;display:grid;place-items:center;padding:16px;background:rgba(2,4,9,.6);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+.md{width:min(420px,100%);padding:22px;border-radius:24px;background:linear-gradient(145deg,rgba(40,52,76,.85),rgba(14,20,34,.92))}
+.md h2{margin-bottom:14px}
+html{-webkit-text-size-adjust:100%}
+body{-webkit-tap-highlight-color:transparent}
+#metric{max-width:100%;overflow-x:auto;flex-wrap:nowrap;scrollbar-width:none}
+#metric::-webkit-scrollbar{display:none}
+#metric button{white-space:nowrap}
+#accBtn span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:240px}
+.btn.x{min-height:0}
+@media(max-width:700px){
+.wrap{padding:12px 12px 40px}
+header{padding:12px;gap:10px;border-radius:20px}
+header .row{width:100%;flex-wrap:nowrap}
+#accBtn{flex:1;justify-content:space-between;min-width:0}
+#accBtn span{max-width:none}
+.logo{width:56px;height:56px}
+h1{font-size:17px}
+.per{padding:12px;gap:10px}
+.per>.row{width:100%}
+.per>.row:first-child{justify-content:space-between}
+.per>.row:last-child{flex-wrap:nowrap}
+.per>.row:last-child .btn{flex:1;justify-content:center}
+.kpis{grid-template-columns:1fr 1fr;gap:10px}
+.kpi{padding:14px}
+.kpi.main{grid-column:1/-1}
+.kpi .v{font-size:20px}
+.kpi.main .v{font-size:26px}
+.card{padding:16px;border-radius:20px}
+.grid{gap:12px;grid-template-columns:minmax(0,1fr)}
+.grid .card{padding:14px}
+form{gap:10px}
+form .row{gap:6px}
+#vAdd{padding:9px 12px}
+.vsum b{font-size:19px}
+#chart{width:100%;overflow:hidden}
+input{font-size:16px}
+.btn,.seg button{min-height:40px}
+.btn.x{min-height:36px}
+.hd{display:none}
+table{min-width:0}
+table,tbody{display:block}
+tr{display:grid;grid-template-columns:1fr 1fr;gap:4px 12px;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.08)}
+td{border:0;padding:2px 0;text-align:left;white-space:normal}
+td::before{content:attr(data-l);display:block;color:var(--mut);font-size:11.5px}
+td:first-child,td:last-child{grid-column:1/-1}
+td:first-child{font-weight:600}
+td:first-child::before,td:last-child::before,td.empty::before{display:none}
+td:last-child{text-align:right}
+td.empty{padding:20px 0;text-align:center}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="glass">
+  <div class="brand"><img class="logo" alt="GhostVPN" src="data:image/webp;base64,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"><h1>Studio GhostVPN</h1></div>
+  <div class="row">
+    <button id="accBtn" class="btn"><span></span><svg class="i" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></button>
+    <button id="renAcc" class="btn ic" title="Изменить название аккаунта" aria-label="Изменить название аккаунта"><svg class="i" viewBox="0 0 24 24"><path d="M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></button>
+    <button id="addAcc" class="btn pri">+ Аккаунт</button>
+  </div>
+</header>
+
+<section class="per glass">
+  <div class="row"><b style="font-family:var(--disp);font-weight:500;font-size:13px">Период</b><div class="seg" id="pre"></div></div>
+  <div class="row"><button class="btn" id="pf"></button><span style="color:var(--mut)">—</span><button class="btn" id="pt"></button></div>
+</section>
+
+<section class="kpis" id="kpis"></section>
+
+<section class="grid">
+  <div class="card glass">
+    <h2 style="margin-bottom:12px">Прирост по дням</h2>
+    <div class="seg" id="metric" style="margin-bottom:12px"></div>
+    <div id="chart"></div>
+  </div>
+  <div class="card glass">
+    <h2>Данные за день</h2>
+    <form id="f">
+      <div class="full"><label>Дата</label><button type="button" class="btn" id="d"></button></div>
+      <div class="full"><label for="v">Просмотры роликов: вводите по одному</label><div class="row"><input id="v" type="number" min="0" inputmode="numeric" placeholder="Просмотры одного ролика"><button type="button" class="btn pri" id="vAdd">Добавить</button></div><div id="vBox"></div></div>
+      <div><label for="s">Подписчики всего</label><input id="s" type="number" min="0" inputmode="numeric" required></div>
+      <div><label for="l">Лайки всего</label><input id="l" type="number" min="0" inputmode="numeric" required></div>
+      <div><label for="a">Заявки: основной</label><input id="a" type="number" min="0" inputmode="numeric" required></div><div><label for="a2">Заявки: клон 1</label><input id="a2" type="number" min="0" inputmode="numeric" required></div><div class="full"><label for="a3">Заявки: клон 2</label><input id="a3" type="number" min="0" inputmode="numeric" required></div>
+      <button class="btn pri full" type="submit">Сохранить день</button>
+    </form>
+    <p class="hint">Просмотры суммируются из роликов сами. Подписчики, лайки и заявки вводите общим числом, как в приложении. Прирост считается сам: сегодня минус предыдущий записанный день. Если дата уже есть, запись обновится.</p>
+  </div>
+</section>
+
+<section class="card glass" style="margin-bottom:16px"><div class="row" style="justify-content:space-between"><h2>Воронка заявок</h2><div class="seg" id="fseg"></div></div><div id="fun"></div></section>
+
+<section class="card glass">
+  <div class="row" style="justify-content:space-between;margin-bottom:8px"><h2>История за период</h2>
+    <div class="row"><button class="btn" id="exp">Скачать копию</button><button class="btn" id="imp">Загрузить копию</button><input id="file" type="file" accept=".json" hidden></div></div>
+  <div class="tw"><table id="tbl"></table></div>
+  <p class="hint">Данные хранятся в этом браузере. Иногда скачивайте копию, чтобы ничего не потерять.</p>
+</section>
+</div>
+
+<script>
+const KEY='tt-dash-v1';
+const M=[['views','Просмотры'],['followers','Подписчики'],['likes','Лайки'],['apps','Заявка 1'],['apps2','Заявка 2'],['apps3','Заявка 3'],['conv','Конверсия']];
+const MN=['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'];
+let S={cur:null,accs:[]},metric='views',P={n:30,from:null,to:null},ED;
+try{const r=localStorage.getItem(KEY);if(r)S=JSON.parse(r)}catch(e){}
+if(!S.accs||!S.accs.length)S={cur:'a1',accs:[{id:'a1',name:'TikTok 1',e:[]}]};
+if(!S.accs.find(a=>a.id===S.cur))S.cur=S.accs[0].id;
+const $=i=>document.getElementById(i);
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
+const acc=()=>S.accs.find(a=>a.id===S.cur);
+const esc=s=>s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const iso=(y,m,d)=>y+'-'+String(m+1).padStart(2,'0')+'-'+String(d).padStart(2,'0');
+const isoD=d=>iso(d.getFullYear(),d.getMonth(),d.getDate());
+const today=()=>isoD(new Date());
+const addD=(s,n)=>{const d=new Date(s+'T00:00');d.setDate(d.getDate()+n);return isoD(d)};
+const lbl=s=>s?new Date(s+'T00:00').toLocaleDateString('ru-RU',{day:'numeric',month:'short',year:'numeric'}).replace(' г.',''):'—';
+const dstr=s=>new Date(s+'T00:00').toLocaleDateString('ru-RU',{day:'numeric',month:'short'});
+const fmt=n=>n==null?'—':Math.round(n).toLocaleString('ru-RU');
+const pct=n=>n==null?'—':n.toLocaleString('ru-RU',{maximumFractionDigits:2})+'%';
+const sg=n=>n==null?'—':(n>0?'+':n<0?'−':'')+fmt(Math.abs(n));
+const cls=n=>n>0?'up':n<0?'dn':'';
+const CAL='<svg class="i" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M8 3v4M16 3v4M3 10h18"/></svg>';
+ED=today();
+
+/* popover */
+let pop=null,popA=null;
+function closePop(){if(pop)pop.remove();pop=popA=null}
+function place(){if(!pop)return;const r=popA.getBoundingClientRect(),w=pop.offsetWidth,h=pop.offsetHeight;let x=Math.min(Math.max(8,r.left),innerWidth-w-8),y=r.bottom+8;if(y+h>innerHeight-8)y=Math.max(8,r.top-h-8);pop.style.left=x+'px';pop.style.top=y+'px'}
+function openPop(a){if(popA===a){closePop();return null}closePop();pop=document.createElement('div');pop.className='pop';document.body.appendChild(pop);popA=a;return pop}
+document.addEventListener('mousedown',e=>{if(pop&&!pop.contains(e.target)&&!popA.contains(e.target))closePop()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closePop()});
+addEventListener('scroll',place,true);addEventListener('resize',place);
+
+function cal(a,val,min,max,pick){
+  const el=openPop(a);if(!el)return;
+  let [y,m]=(val||today()).split('-').map(Number);m--;
+  const draw=()=>{
+    const off=(new Date(y,m,1).getDay()+6)%7,n=new Date(y,m+1,0).getDate();
+    let h=`<div class="ch"><button data-n="-1" aria-label="Назад">‹</button><b>${MN[m]} ${y}</b><button data-n="1" aria-label="Вперёд">›</button></div><div class="cg">`+['Пн','Вт','Ср','Чт','Пт','Сб','Вс'].map(d=>`<i>${d}</i>`).join('')+'<span></span>'.repeat(off);
+    for(let d=1;d<=n;d++){const s=iso(y,m,d),dis=(min&&s<min)||(max&&s>max);h+=`<button data-d="${s}" class="${s===val?'on':''} ${s===today()?'td':''}" ${dis?'disabled':''}>${d}</button>`}
+    el.innerHTML=h+`</div><button class="ft" data-d="${today()}">Сегодня</button>`;place();
+  };
+  el.onclick=e=>{const b=e.target.closest('button');if(!b||b.disabled)return;
+    if(b.dataset.n){m+=+b.dataset.n;if(m<0){m=11;y--}if(m>11){m=0;y++}draw()}
+    else if(b.dataset.d){pick(b.dataset.d);closePop()}};
+  draw();
+}
+
+/* modal */
+function modal(title,val,ok,onOk,onDel){
+  closePop();const o=document.createElement('div');o.className='ov';
+  o.innerHTML=`<div class="md"><h2>${title}</h2><input id="mi" maxlength="40" placeholder="Например, GhostVPN Основной" value="${esc(val)}"><div class="row" style="margin-top:16px;justify-content:space-between"><div>${onDel?'<button class="btn" id="mdl">Удалить аккаунт</button>':''}</div><div class="row"><button class="btn" id="mc">Отмена</button><button class="btn pri" id="mo">${ok}</button></div></div></div>`;
+  document.body.appendChild(o);const inp=o.querySelector('#mi');inp.focus();inp.select();
+  const close=()=>{o.remove();document.removeEventListener('keydown',kd)};
+  const go=()=>{if(inp.value.trim()){onOk(inp.value.trim());close()}};
+  const kd=e=>{if(e.key==='Escape')close();if(e.key==='Enter')go()};
+  document.addEventListener('keydown',kd);
+  o.onmousedown=e=>{if(e.target===o)close()};
+  o.querySelector('#mc').onclick=close;o.querySelector('#mo').onclick=go;
+  const dl=o.querySelector('#mdl');if(dl)dl.onclick=()=>{if(dl.dataset.s){onDel();close()}else{dl.dataset.s=1;dl.textContent='Точно удалить?'}};
+}
+
+/* data */
+const g=(x,p,k)=>x[k]==null||p[k]==null?null:x[k]-p[k];
+function rows(){
+  const e=[...acc().e].sort((x,y)=>x.date<y.date?-1:1);
+  return e.map((x,i)=>{const p=e[i-1];
+    const d=p?{views:x.views-p.views,followers:x.followers-p.followers,likes:x.likes-p.likes,apps:x.apps-p.apps,apps2:g(x,p,'apps2'),apps3:g(x,p,'apps3')}:null;
+    if(d)d.conv=d.views>0?d.apps/d.views*100:null;return {...x,d}});
+}
+function rng(R){
+  if(P.n)return [addD(today(),1-P.n),today()];
+  if(P.n===0)return [R.length?R[0].date:null,R.length?R[R.length-1].date:null];
+  return [P.from,P.to];
+}
+
+function render(){
+  const A=acc();$('accBtn').firstElementChild.textContent=A.name;
+  const R=rows(),[f,t]=rng(R);
+  const Rp=R.filter(r=>(!f||r.date>=f)&&(!t||r.date<=t)),pd=Rp.filter(r=>r.d);
+  const sum=k=>pd.reduce((s,r)=>s+r.d[k],0),last=R[R.length-1];
+  $('pf').innerHTML=CAL+'<span>'+lbl(f)+'</span>';$('pt').innerHTML=CAL+'<span>'+lbl(t)+'</span>';
+  $('pre').innerHTML=[[7,'7 дн'],[30,'30 дн'],[90,'90 дн'],[0,'Всё']].map(p=>`<button data-p="${p[0]}" class="${P.n===p[0]?'on':''}">${p[1]}</button>`).join('');
+  const kp=(l,v,s,c)=>`<div class="kpi glass ${c||''}"><div class="l">${l}</div><div class="v">${v}</div><div class="s">${s}</div></div>`;
+  const k=(l,key)=>{const v=pd.length?sum(key):null;return kp(l,sg(v),'всего '+fmt(last?last[key]:0))};
+  const sv=sum('views'),sa=sum('apps');
+  $('kpis').innerHTML=kp('Конверсия за период',pd.length&&sv>0?pct(sa/sv*100):'—',pd.length?`${fmt(sa)} заявок на ${fmt(sv)} просмотров`+(sa>0&&sv>0?` · каждый ${fmt(sv/sa)}-й`:''):'нужно минимум 2 дня данных','main')+
+    k('Просмотры','views')+k('Подписчики','followers')+k('Лайки','likes')+k('Заявка 1 · основной','apps');
+  $('metric').innerHTML=M.map(m=>`<button data-m="${m[0]}" class="${m[0]===metric?'on':''}">${m[1]}</button>`).join('');
+  chart(pd,f,t);table(Rp);drawV();funnel(pd,last);
+}
+let fm='p',lw=0;
+function nice(m){const p=Math.pow(10,Math.floor(Math.log10(m))),r=m/p;return(r<=1?1:r<=2?2:r<=5?5:10)*p}
+function chart(pd,f,t){
+  if(!pd.length){$('chart').innerHTML='<div class="empty">В выбранном периоде нет данных для графика. Нужно минимум два дня записей.</div>';return}
+  const mp={};pd.forEach(p=>mp[p.date]=p);
+  let days=[];
+  if(f&&t){for(let d=f,i=0;d<=t&&i<=121;d=addD(d,1),i++)days.push(d);if(days.length>120)days=[]}
+  if(!days.length)days=pd.map(p=>p.date);
+  const W=Math.max(280,Math.round($('chart').clientWidth)||640),H=240,L=46,B=28,T=20,n=days.length,cv=metric==='conv';lw=$('chart').clientWidth;
+  const mx=Math.max(...pd.map(p=>p.d[metric]||0),cv?.1:1);
+  const step=Math.max(nice(mx/4),cv?.1:1),top=step*Math.ceil(mx/step-1e-9),slot=(W-L)/n,bw=Math.min(slot*.72,44),lastD=pd[pd.length-1].date;
+  let s=`<svg viewBox="0 0 ${W} ${H}" width="100%" role="img" aria-label="График прироста"><defs><linearGradient id="g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9bd0ff"/><stop offset="1" stop-color="#2563eb" stop-opacity=".55"/></linearGradient><linearGradient id="g2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#6db1ff" stop-opacity=".7"/></linearGradient></defs>`;
+  for(let v=0;v<=top+1e-9;v+=step){const y=T+(H-T-B)*(1-v/top);s+=`<line x1="${L}" x2="${W}" y1="${y}" y2="${y}" stroke="rgba(255,255,255,.08)"/><text x="${L-8}" y="${y+4}" text-anchor="end">${cv?(+v.toFixed(2))+'%':fmt(v)}</text>`}
+  days.forEach((d,i)=>{const p=mp[d],x=L+i*slot+(slot-bw)/2;
+    if(p){const v=Math.max(p.d[metric]||0,0),h=Math.max((H-T-B)*v/top,2);
+      s+=`<rect class="bar" x="${x}" y="${H-B-h}" width="${bw}" height="${h}" rx="5" fill="url(#${d===lastD?'g2':'g1'})"><title>${dstr(d)}: ${cv?pct(v):sg(v)}</title></rect>`+(bw>=26?`<text x="${x+bw/2}" y="${H-B-h-5}" text-anchor="middle" style="fill:#cfe3ff">${cv?pct(v):fmt(v)}</text>`:'')}
+    if(i%Math.ceil(n/Math.max(2,Math.floor((W-L)/58)))===0)s+=`<text x="${L+i*slot+slot/2}" y="${H-8}" text-anchor="middle">${dstr(d)}</text>`});
+  $('chart').innerHTML=s+'</svg>';
+}
+function funnel(pd,last){
+  const useP=fm==='p'&&pd.length>0,sm=k=>pd.reduce((s,r)=>s+(r.d[k]||0),0);
+  const v=useP?sm('views'):(last?last.views:0);
+  const a=['apps','apps2','apps3'].map(k=>useP?sm(k):(last&&last[k]!=null?last[k]:null));
+  const q=(x,y)=>x!=null&&y>0?pct(x/y*100):'—',mx=Math.max(a[0]||0,1),ev=(y,x)=>x>0&&y>0?'каждый '+fmt(y/x)+'-й просмотр':'—';
+  const st=[['Заявка 1','основной канал',a[0],q(a[0],v)+' от просмотров · '+ev(v,a[0])],['Заявка 2','клон 1, после сообщения бота',a[1],q(a[1],a[0])+' от заявки 1'],['Заявка 3','клон 2, после второго сообщения',a[2],q(a[2],a[1])+' от заявки 2 · '+q(a[2],a[0])+' от заявки 1']];
+  $('fseg').innerHTML=[['p','За период'],['t','Всего']].map(b=>`<button data-f="${b[0]}" class="${fm===b[0]?'on':''}">${b[1]}</button>`).join('');
+  $('fun').innerHTML=`<p class="hint" style="margin-top:8px">Просмотры: <b style="color:var(--tx)">${fmt(v)}</b></p>`+st.map(s=>`<div class="fr"><div class="fh"><span><b>${s[0]}</b><small>${s[1]}</small></span><span class="fn">${fmt(s[2])}</span></div><div class="fb"><i style="width:${s[2]>0?Math.max(s[2]/mx*100,2):0}%"></i></div><div class="fp">${s[3]}</div></div>`).join('')+(fm==='p'&&!pd.length?'<p class="fnote">В периоде пока нет прироста (нужно минимум 2 дня), поэтому показаны общие итоги.</p>':'');
+}
+function table(R){
+  if(!R.length){$('tbl').innerHTML='<tr><td class="empty">В этом периоде записей нет.</td></tr>';return}
+  const c=(t,dl)=>`<td>${fmt(t)}<small class="${cls(dl)}">${dl==null?'':sg(dl)}</small></td>`;
+  $('tbl').innerHTML='<tr class="hd"><th>Дата</th><th>Просмотры</th><th>Подписчики</th><th>Лайки</th><th>Заявка 1</th><th>Заявка 2</th><th>Заявка 3</th><th>Конверсия</th><th></th></tr>'+
+  [...R].reverse().map(r=>`<tr><td>${lbl(r.date)}</td>${c(r.views,r.d&&r.d.views)}${c(r.followers,r.d&&r.d.followers)}${c(r.likes,r.d&&r.d.likes)}${c(r.apps,r.d&&r.d.apps)}${c(r.apps2,r.d&&r.d.apps2)}${c(r.apps3,r.d&&r.d.apps3)}<td>${r.d?pct(r.d.conv):'—'}</td><td><button class="btn x" data-del="${r.date}">Удалить</button></td></tr>`).join('');
+  const hd=['Дата','Просмотры','Подписчики','Лайки','Заявка 1','Заявка 2','Заявка 3','Конверсия',''];[...$('tbl').rows].forEach(tr=>[...tr.cells].forEach((td,i)=>td.dataset.l=hd[i]||''));
+}
+
+function dr(){return acc().draft||(acc().draft=[])}
+function drawV(){
+  const d=dr(),sum=d.reduce((a,b)=>a+b,0),p=rows().filter(r=>r.date<ED).pop();
+  $('vBox').innerHTML=`<div class="vsum"><div><div class="l">Всего просмотров</div><b>${fmt(sum)}</b>${p&&d.length?`<span class="${cls(sum-p.views)}">${sg(sum-p.views)} к ${lbl(p.date)}</span>`:''}</div>${d.length?'<button type="button" class="btn x" data-vc>Сбросить</button>':''}</div><div class="chips">${d.map((n,i)=>`<button type="button" class="chip" data-vi="${i}" title="Убрать">${fmt(n)} ✕</button>`).join('')}</div>`;
+}
+function addV(){const v=$('v').value;if(v===''||!(+v>=0))return;dr().push(Math.round(+v));save();$('v').value='';$('v').placeholder='Просмотры одного ролика';$('v').focus();drawV()}
+$('vAdd').onclick=addV;
+$('v').onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();addV()}};
+/* events */
+document.addEventListener('click',e=>{
+  const t=e.target.closest('button');if(!t)return;
+  if(t.dataset.m){metric=t.dataset.m;render()}
+  if(t.dataset.f){fm=t.dataset.f;render()}
+  if(t.dataset.vi!=null){dr().splice(+t.dataset.vi,1);save();drawV()}
+  if(t.dataset.vc!=null){acc().draft=[];save();drawV()}
+  if(t.dataset.p!=null){P={n:+t.dataset.p,from:null,to:null};render()}
+  if(t.dataset.del){if(t.dataset.s){acc().e=acc().e.filter(x=>x.date!==t.dataset.del);save();render()}else{t.dataset.s=1;t.textContent='Точно?';setTimeout(()=>{if(t.isConnected){t.textContent='Удалить';delete t.dataset.s}},3000)}}
+});
+$('pf').onclick=e=>{const R=rows(),[f,t]=rng(R);cal($('pf'),f,null,t,s=>{P={n:null,from:s,to:t||today()};render()})};
+$('pt').onclick=e=>{const R=rows(),[f,t]=rng(R);cal($('pt'),t,f,null,s=>{P={n:null,from:f||s,to:s};render()})};
+$('d').innerHTML=CAL+'<span>'+lbl(ED)+'</span>';
+$('d').onclick=()=>cal($('d'),ED,null,today(),s=>{ED=s;drawV();$('d').innerHTML=CAL+'<span>'+lbl(ED)+'</span>'});
+$('accBtn').onclick=()=>{const el=openPop($('accBtn'));if(!el)return;el.classList.add('menu');
+  el.innerHTML=S.accs.map(a=>`<button data-id="${a.id}" class="${a.id===S.cur?'on':''}">${esc(a.name)}</button>`).join('');place();
+  el.onclick=e=>{const b=e.target.closest('button');if(b){S.cur=b.dataset.id;save();closePop();render()}}};
+$('addAcc').onclick=()=>modal('Новый TikTok аккаунт','','Добавить',n=>{const id='a'+Date.now();S.accs.push({id,name:n,e:[]});S.cur=id;save();render()});
+$('renAcc').onclick=()=>modal('Название аккаунта',acc().name,'Сохранить',n=>{acc().name=n;save();render()},S.accs.length>1?()=>{S.accs=S.accs.filter(a=>a.id!==S.cur);S.cur=S.accs[0].id;save();render()}:null);
+$('f').onsubmit=e=>{e.preventDefault();if($('v').value!=='')addV();const sumV=dr().reduce((a,b)=>a+b,0);if(!dr().length){$('v').placeholder='Сначала добавьте просмотры';$('v').focus();return}
+  const x={date:ED,views:sumV,followers:+$('s').value,likes:+$('l').value,apps:+$('a').value,apps2:+$('a2').value,apps3:+$('a3').value};
+  const a=acc();a.e=a.e.filter(r=>r.date!==x.date);a.e.push(x);a.draft=[];save();['s','l','a','a2','a3'].forEach(i=>$(i).value='');render()};
+addEventListener('resize',()=>{if(Math.abs($('chart').clientWidth-lw)>2)render()});
+$('exp').onclick=()=>{const u=URL.createObjectURL(new Blob([JSON.stringify(S)],{type:'application/json'}));const l=document.createElement('a');l.href=u;l.download='ghostvpn-studio.json';l.click()};
+$('imp').onclick=()=>$('file').click();
+$('file').onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const j=JSON.parse(r.result);if(j.accs&&j.accs.length){S=j;if(!S.accs.find(a=>a.id===S.cur))S.cur=S.accs[0].id;save();render()}}catch(x){}};r.readAsText(f)};
+render();
+</script>
+</body>
+</html>
